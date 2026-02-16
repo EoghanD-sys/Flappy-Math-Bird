@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Écran de défi mathématique - Flappy Math Bird</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee6c",
+                        "primary-dark": "#20c558",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "neutral-surface": "#eef2ee", // Derived from primary hue
+                        "neutral-dark-surface": "#1a2e20", // Derived from primary hue
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem", 
+                        "lg": "2rem", 
+                        "xl": "3rem", 
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -10px rgba(43, 238, 108, 0.15)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles for things Tailwind can't easily express purely with utility classes */
+        body {
+            font-family: 'Spline Sans', sans-serif;
+        }
+        
+        /* Pattern background for the game "blur" effect */
+        .game-bg {
+            background-color: #87CEEB;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.4) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.4) 0%, transparent 20%);
+        }
+        
+        .mascot-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-white h-screen w-screen overflow-hidden relative font-display">
+<!-- Background Simulation (The "Game" behind the modal) -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<!-- Abstract representation of the game world -->
+<div class="w-full h-full bg-blue-300 dark:bg-blue-900 relative">
+<!-- Clouds -->
+<div class="absolute top-20 left-20 w-32 h-16 bg-white/40 rounded-full blur-md"></div>
+<div class="absolute top-40 right-40 w-48 h-20 bg-white/30 rounded-full blur-md"></div>
+<!-- Pipes / Obstacles blurred -->
+<div class="absolute bottom-0 left-1/4 w-24 h-64 bg-green-500/50 rounded-t-lg blur-sm border-4 border-green-700/30"></div>
+<div class="absolute top-0 right-1/3 w-24 h-48 bg-green-500/50 rounded-b-lg blur-sm border-4 border-green-700/30"></div>
+<!-- The crash overlay tint -->
+<div class="absolute inset-0 bg-background-light/60 dark:bg-background-dark/80 backdrop-blur-sm z-10"></div>
+</div>
+</div>
+<!-- Main Modal Container -->
+<div class="relative z-20 w-full h-full flex items-center justify-center p-4">
+<div class="bg-white dark:bg-neutral-dark-surface rounded-xl shadow-soft max-w-4xl w-full flex flex-col md:flex-row overflow-hidden border border-primary/20 relative">
+<!-- Decorative corner blob -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Left Side: Mascot & Encouragement -->
+<div class="w-full md:w-2/5 bg-neutral-surface dark:bg-green-900/20 p-8 flex flex-col items-center justify-center text-center border-b md:border-b-0 md:border-r border-primary/10">
+<div class="mascot-float mb-6 relative">
+<!-- Speech Bubble -->
+<div class="absolute -top-12 -right-8 bg-white dark:bg-background-dark px-4 py-2 rounded-lg rounded-bl-none shadow-sm border border-primary/20 transform rotate-6 z-10">
+<span class="text-sm font-bold text-green-700 dark:text-primary">Tu peux le faire!</span>
+</div>
+<!-- Mascot Image -->
+<div class="w-40 h-40 relative">
+<img alt="Cartoon yellow bird illustration" class="w-full h-full object-cover rounded-full border-4 border-white dark:border-background-dark shadow-lg" data-alt="Cute cartoon yellow bird character smiling confidently" src="https://www.allaboutbirds.org/guide/assets/photo/67271871-480px.jpg"/>
+</div>
+</div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Oups! C'est pas grave.</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Reste concentré et résous cette énigme pour continuer!</p>
+
+</div>
+<!-- Right Side: The Challenge -->
+<div class="w-full md:w-3/5 p-8 md:p-12 flex flex-col items-center justify-center relative">
+<div class="w-full max-w-md space-y-8">
+<!-- Header Text -->
+<div class="text-center">
+<h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                            Résous pour continuer
+                        </h1>
+</div>
+<!-- The Math Problem -->
+<div class="bg-primary/10 dark:bg-primary/5 rounded-lg border-2 border-primary/20 border-dashed p-8 text-center relative overflow-hidden group hover:border-primary/40 transition-colors">
+<!-- Abstract number background decoration -->
+<div class="absolute top-2 left-4 text-6xl font-black text-primary/5 select-none transform -rotate-12 pointer-events-none">?</div>
+<div class="absolute bottom-2 right-4 text-6xl font-black text-primary/5 select-none transform rotate-12 pointer-events-none">+</div>
+<div class="text-6xl md:text-7xl font-black text-gray-800 dark:text-white tracking-tight flex items-center justify-center gap-4">
+<span>7</span>
+<span class="text-primary">+</span>
+<span>5</span>
+<span>=</span>
+<span class="text-primary animate-pulse">?</span>
+</div>
+</div>
+<!-- Input and Action -->
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<div class="relative">
+<input autofocus="" class="w-full text-center text-3xl font-bold py-6 rounded-full border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 focus:border-primary focus:ring-4 focus:ring-primary/20 focus:outline-none transition-all placeholder:text-gray-300 dark:text-white" placeholder="Écris ta réponse..." type="number"/>
+<!-- Helper icon inside input -->
+<div class="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-300 pointer-events-none">
+<svg class="h-8 w-8" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<button class="w-full bg-primary hover:bg-primary-dark text-background-dark font-bold text-xl py-5 px-8 rounded-full shadow-lg shadow-primary/30 transform transition hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+<span>Vol à nouveau !</span>
+<svg class="h-6 w-6" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" fill-rule="evenodd"></path>
+</svg>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-sm font-medium py-2 transition-colors" type="button">
+                                Abandonner et recommencer
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</body></html>

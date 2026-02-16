@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flappy Math Bird - Game Over</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2bee6c",
+              "background-light": "#f6f8f6",
+              "background-dark": "#102216",
+              "neutral-green": {
+                  50: '#f0fdf4',
+                  100: '#dcfce7',
+                  200: '#bbf7d0',
+                  300: '#86efac',
+                  400: '#4ade80',
+                  500: '#22c55e',
+                  600: '#16a34a',
+                  700: '#15803d',
+                  800: '#166534',
+                  900: '#14532d',
+              }
+            },
+            fontFamily: {
+              "display": ["Spline Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "2xl": "4rem", "full": "9999px"},
+            backgroundImage: {
+                'game-pattern': "radial-gradient(circle, #2bee6c 1px, transparent 1px)",
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom Animations for that bouncy game feel */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes pop-in {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .star-1 { animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards; opacity: 0; }
+        .star-2 { animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s forwards; opacity: 0; }
+        .star-3 { animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s forwards; opacity: 0; }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #2bee6c;
+            top: 0;
+            opacity: 0;
+        }
+        
+        /* Subtle texture for background */
+        .bg-dots {
+            background-size: 20px 20px;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-neutral-green-900 dark:text-white min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+<!-- Abstract Game Background Context -->
+<div class="absolute inset-0 z-0 bg-dots bg-game-pattern"></div>
+<!-- Decorative clouds for the "sky" theme -->
+<div class="absolute top-10 left-10 w-32 h-12 bg-white/40 dark:bg-white/5 rounded-full blur-xl animate-float" style="animation-delay: 1s;"></div>
+<div class="absolute bottom-20 right-20 w-48 h-16 bg-white/40 dark:bg-white/5 rounded-full blur-xl animate-float" style="animation-delay: 2s;"></div>
+<!-- Main Game Over Modal -->
+<main class="relative z-10 w-full max-w-lg">
+<!-- Celebration Mascot (Floats above card) -->
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-40 h-40 z-20 animate-float">
+<!-- Placeholder for Bird Mascot -->
+<div class="w-full h-full relative">
+<img alt="A cute cartoon bird wearing a party hat" class="w-full h-full object-cover rounded-full border-8 border-white dark:border-background-dark shadow-xl" data-alt="Cute cartoon bird illustration mascot cheering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1bcwZK24WfxsQOi2LlNEJvWO8n8ctO0U79qZr9o5pphKp--oYT3eSv6tcOVND0-dO69sRYxNuM4iFOasiqD7dynfSgEc21i6I1njPFA2x4jFiTr7m5IXvFErXQh-XF6fftjUmwdJCcHM3cOfcunLPm1pYuY8eUU6PZUupfk0eorrUASJUDALxqOvxYO7LEYw2bljxKYHoVIAvKvKQHJUEv21cvPDGdW6XpZrdDa0jf4S4xWIN81h1TmYLSVI-IbkWoy32KEETnv1v"/>
+<!-- Badge on Mascot -->
+<div class="absolute -bottom-2 -right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg border-2 border-white transform rotate-12">
+                    WINNER!
+                </div>
+</div>
+</div>
+<!-- Card Container -->
+<div class="bg-white dark:bg-neutral-green-900 rounded-2xl shadow-2xl p-8 pt-20 text-center relative border border-neutral-green-100 dark:border-neutral-green-800">
+<!-- Confetti decoration inside card (top corners) -->
+<div class="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-primary/20 to-transparent rounded-tl-2xl rounded-br-full opacity-50"></div>
+<div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/20 to-transparent rounded-tr-2xl rounded-bl-full opacity-50"></div>
+<!-- Header -->
+<h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-neutral-green-700 to-neutral-green-500 dark:from-primary dark:to-neutral-green-300 mb-2">
+                Game Over!
+            </h1>
+<p class="text-neutral-green-600 dark:text-neutral-green-300 font-medium text-lg mb-8">
+                Great job, Math Wizard!
+            </p>
+<!-- Score Section -->
+<div class="bg-neutral-green-50 dark:bg-neutral-green-800/50 rounded-xl p-6 mb-8 border border-neutral-green-100 dark:border-neutral-green-700 relative overflow-hidden">
+<!-- Decorative background blob behind score -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+<div class="relative z-10">
+<span class="block text-sm font-bold text-neutral-green-500 dark:text-neutral-green-400 uppercase tracking-widest mb-1">Total Score</span>
+<div class="text-6xl font-black text-neutral-green-800 dark:text-white mb-4 tracking-tight">
+                        1,250
+                    </div>
+<!-- Star Rating -->
+<div class="flex justify-center gap-3">
+<div class="star-1 relative">
+<span class="material-icons-round text-5xl text-yellow-400 drop-shadow-md">star</span>
+</div>
+<div class="star-2 relative -mt-4"> <!-- Middle star slightly higher -->
+<span class="material-icons-round text-6xl text-yellow-400 drop-shadow-lg">star</span>
+</div>
+<div class="star-3 relative">
+<span class="material-icons-round text-5xl text-neutral-green-200 dark:text-neutral-green-700">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Grid (Optional details) -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-neutral-green-50 dark:bg-neutral-green-800/30 rounded-lg p-3">
+<div class="flex items-center justify-center gap-2 text-neutral-green-600 dark:text-neutral-green-300 mb-1">
+<span class="material-icons-round text-primary text-sm">bolt</span>
+<span class="text-xs font-bold uppercase">Streak</span>
+</div>
+<span class="text-xl font-bold text-neutral-green-800 dark:text-white">12</span>
+</div>
+<div class="bg-neutral-green-50 dark:bg-neutral-green-800/30 rounded-lg p-3">
+<div class="flex items-center justify-center gap-2 text-neutral-green-600 dark:text-neutral-green-300 mb-1">
+<span class="material-icons-round text-blue-400 text-sm">schedule</span>
+<span class="text-xs font-bold uppercase">Time</span>
+</div>
+<span class="text-xl font-bold text-neutral-green-800 dark:text-white">4:20</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="space-y-4">
+<button class="w-full group relative overflow-hidden bg-primary hover:bg-neutral-green-400 text-neutral-green-900 font-bold text-xl py-4 rounded-full shadow-lg shadow-primary/30 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3">
+<span class="absolute inset-0 w-full h-full bg-white/20 group-hover:bg-white/30 transition-colors"></span>
+<span class="material-icons-round text-2xl relative z-10">replay</span>
+<span class="relative z-10">Accueil</span>
+</button>
+
+</div>
+</div>
+<!-- Footer encouragement -->
+<div class="mt-6 text-center">
+<p class="text-sm text-neutral-green-600 dark:text-neutral-green-400 bg-white/50 dark:bg-black/20 backdrop-blur-sm inline-block px-4 py-2 rounded-full">
+                💡 Tip: You're getting better every day!
+            </p>
+</div>
+</main>
+</body></html>
