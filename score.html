@@ -85,17 +85,7 @@
 <div class="absolute bottom-20 right-20 w-48 h-16 bg-white/40 dark:bg-white/5 rounded-full blur-xl animate-float" style="animation-delay: 2s;"></div>
 <!-- Main Game Over Modal -->
 <main class="relative z-10 w-full max-w-lg">
-<!-- Celebration Mascot (Floats above card) -->
-<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-40 h-40 z-20 animate-float">
-<!-- Placeholder for Bird Mascot -->
-<div class="w-full h-full relative">
-<img alt="A cute cartoon bird wearing a party hat" class="w-full h-full object-cover rounded-full border-8 border-white dark:border-background-dark shadow-xl" data-alt="Cute cartoon bird illustration mascot cheering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1bcwZK24WfxsQOi2LlNEJvWO8n8ctO0U79qZr9o5pphKp--oYT3eSv6tcOVND0-dO69sRYxNuM4iFOasiqD7dynfSgEc21i6I1njPFA2x4jFiTr7m5IXvFErXQh-XF6fftjUmwdJCcHM3cOfcunLPm1pYuY8eUU6PZUupfk0eorrUASJUDALxqOvxYO7LEYw2bljxKYHoVIAvKvKQHJUEv21cvPDGdW6XpZrdDa0jf4S4xWIN81h1TmYLSVI-IbkWoy32KEETnv1v"/>
-<!-- Badge on Mascot -->
-<div class="absolute -bottom-2 -right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg border-2 border-white transform rotate-12">
-                    WINNER!
-                </div>
-</div>
-</div>
+
 <!-- Card Container -->
 <div class="bg-white dark:bg-neutral-green-900 rounded-2xl shadow-2xl p-8 pt-20 text-center relative border border-neutral-green-100 dark:border-neutral-green-800">
 <!-- Confetti decoration inside card (top corners) -->
@@ -103,10 +93,10 @@
 <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/20 to-transparent rounded-tr-2xl rounded-bl-full opacity-50"></div>
 <!-- Header -->
 <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-neutral-green-700 to-neutral-green-500 dark:from-primary dark:to-neutral-green-300 mb-2">
-                Game Over!
+                Perdu !
             </h1>
 <p class="text-neutral-green-600 dark:text-neutral-green-300 font-medium text-lg mb-8">
-                Great job, Math Wizard!
+                C'est pas mal !
             </p>
 <!-- Score Section -->
 <div class="bg-neutral-green-50 dark:bg-neutral-green-800/50 rounded-xl p-6 mb-8 border border-neutral-green-100 dark:border-neutral-green-700 relative overflow-hidden">
@@ -114,48 +104,24 @@
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
 <div class="relative z-10">
 <span class="block text-sm font-bold text-neutral-green-500 dark:text-neutral-green-400 uppercase tracking-widest mb-1">Total Score</span>
-<div class="text-6xl font-black text-neutral-green-800 dark:text-white mb-4 tracking-tight">
-                        1,250
+<div class="text-6xl font-black text-neutral-green-800 dark:text-white mb-4 tracking-tight" id="score-display">
+                        0
                     </div>
-<!-- Star Rating -->
-<div class="flex justify-center gap-3">
-<div class="star-1 relative">
-<span class="material-icons-round text-5xl text-yellow-400 drop-shadow-md">star</span>
-</div>
-<div class="star-2 relative -mt-4"> <!-- Middle star slightly higher -->
-<span class="material-icons-round text-6xl text-yellow-400 drop-shadow-lg">star</span>
-</div>
-<div class="star-3 relative">
-<span class="material-icons-round text-5xl text-neutral-green-200 dark:text-neutral-green-700">star</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Stats Grid (Optional details) -->
-<div class="grid grid-cols-2 gap-4 mb-8">
-<div class="bg-neutral-green-50 dark:bg-neutral-green-800/30 rounded-lg p-3">
-<div class="flex items-center justify-center gap-2 text-neutral-green-600 dark:text-neutral-green-300 mb-1">
-<span class="material-icons-round text-primary text-sm">bolt</span>
-<span class="text-xs font-bold uppercase">Streak</span>
-</div>
-<span class="text-xl font-bold text-neutral-green-800 dark:text-white">12</span>
-</div>
-<div class="bg-neutral-green-50 dark:bg-neutral-green-800/30 rounded-lg p-3">
-<div class="flex items-center justify-center gap-2 text-neutral-green-600 dark:text-neutral-green-300 mb-1">
-<span class="material-icons-round text-blue-400 text-sm">schedule</span>
-<span class="text-xs font-bold uppercase">Time</span>
-</div>
-<span class="text-xl font-bold text-neutral-green-800 dark:text-white">4:20</span>
+
 </div>
 </div>
 <!-- Actions -->
-<div class="space-y-4">
-<button class="w-full group relative overflow-hidden bg-primary hover:bg-neutral-green-400 text-neutral-green-900 font-bold text-xl py-4 rounded-full shadow-lg shadow-primary/30 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3">
+<div class="flex gap-4">
+<button onclick="window.location.href='home.html';" class="flex-1 group relative overflow-hidden bg-gray-300 hover:bg-gray-400 text-gray-900 font-bold text-lg py-4 rounded-full shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3">
 <span class="absolute inset-0 w-full h-full bg-white/20 group-hover:bg-white/30 transition-colors"></span>
 <span class="material-icons-round text-2xl relative z-10">replay</span>
 <span class="relative z-10">Accueil</span>
 </button>
-
+<button onclick="window.location.href='Mort.html';" class="flex-1 group relative overflow-hidden bg-primary hover:bg-neutral-green-400 text-neutral-green-900 font-bold text-lg py-4 rounded-full shadow-lg shadow-primary/30 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3">
+<span class="absolute inset-0 w-full h-full bg-white/20 group-hover:bg-white/30 transition-colors"></span>
+<span class="material-icons-round text-2xl relative z-10">play_circle</span>
+<span class="relative z-10">Continuer</span>
+</button>
 </div>
 </div>
 <!-- Footer encouragement -->
@@ -165,4 +131,16 @@
             </p>
 </div>
 </main>
-</body></html>
+</body>
+
+<script>
+// Récupérer le score du localStorage
+let lastScore = localStorage.getItem('lastScore');
+if (lastScore) {
+    document.getElementById('score-display').textContent = lastScore;
+} else {
+    document.getElementById('score-display').textContent = "Pas encore joué";
+}
+</script>
+
+</html>

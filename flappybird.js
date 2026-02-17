@@ -35,6 +35,8 @@ let velocityY = 0; //bird jump speed
 let gravity = 0.4;
 
 let gameOver = false;
+let gameStarted = false; // Nouvel état pour savoir si le jeu a démarré
+let gameOverTriggered = false; // Pour éviter les redirections multiples
 let score = 0;
 
 window.onload = function() {
@@ -67,10 +69,37 @@ window.onload = function() {
 
 function update() {
     requestAnimationFrame(update);
+    context.clearRect(0, 0, board.width, board.height);
+
+    // Si le jeu n'a pas démarré, afficher l'écran d'accueil
+    if (!gameStarted) {
+        // Fond semi-transparent gris
+        context.fillStyle = "rgba(0, 0, 0, 0.5)";
+        context.fillRect(0, 0, board.width, board.height);
+
+        // Titre
+        context.fillStyle = "white";
+        context.font = "bold 32px sans-serif";
+        context.textAlign = "center";
+        context.fillText("Flappy Math Bird", board.width / 2, 100);
+
+        // Instructions
+        context.font = "20px sans-serif";
+        context.fillText("Appuie sur la barre espace", board.width / 2, 200);
+        context.fillText("pour commencer", board.width / 2, 250);
+
+        // Sous-texte
+        context.font = "italic 16px sans-serif";
+        context.fillStyle = "rgba(255, 255, 255, 0.7)";
+        context.fillText("Évite les tuyaux !", board.width / 2, 320);
+        
+        context.textAlign = "left";
+        return; // Ne pas exécuter le reste du jeu
+    }
+
     if (gameOver) {
         return;
     }
-    context.clearRect(0, 0, board.width, board.height);
 
     //bird
     velocityY += gravity;
@@ -80,6 +109,7 @@ function update() {
 
     if (bird.y > board.height) {
         gameOver = true;
+        localStorage.setItem('lastScore', Math.floor(score));
     }
 
     //pipes
@@ -95,6 +125,7 @@ function update() {
 
         if (detectCollision(bird, pipe)) {
             gameOver = true;
+            localStorage.setItem('lastScore', Math.floor(score));
         }
     }
 
@@ -109,7 +140,11 @@ function update() {
     context.fillText(score, 5, 45);
 
     if (gameOver) {
-        context.fillText("GAME OVER", 5, 90);
+        // Redirection immédiate vers score.html
+        if (!gameOverTriggered) {
+            gameOverTriggered = true;
+            window.location.href = 'score.html';
+        }
     }
 }
 
@@ -147,6 +182,12 @@ function placePipes() {
 
 function moveBird(e) {
     if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyX") {
+        // Si le jeu n'a pas démarré, le démarrer
+        if (!gameStarted) {
+            gameStarted = true;
+            return; // Ne pas faire sauter l'oiseau au premier démarrage
+        }
+
         //jump
         velocityY = -6;
 
@@ -156,6 +197,7 @@ function moveBird(e) {
             pipeArray = [];
             score = 0;
             gameOver = false;
+            gameStarted = false; // Retour à l'écran d'accueil
         }
     }
 }
