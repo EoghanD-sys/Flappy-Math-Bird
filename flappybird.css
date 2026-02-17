@@ -1,0 +1,9 @@
+body{
+     font-family: 'Spline Sans', sans-serif, monospace;
+     text-align: center;
+}
+
+#board{
+   /* background-color: #87CEEB;*/
+    background-image: url('./images/flappybirdbg.png');
+}

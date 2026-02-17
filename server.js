@@ -40,5 +40,5 @@ app.post('/api/validate-code', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
+  console.log(`Serveur lancé sur http://localhost:${PORT}`);
 });
