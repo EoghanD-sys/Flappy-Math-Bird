@@ -97,47 +97,56 @@
 <!-- Main Container -->
 <main class="relative z-10 w-full max-w-md px-6">
 <!-- Bird Mascot Peeking Over -->
-<div class="flex justify-center -mb-16 relative z-20 animate-float">
+<div class="flex justify-center -mb-10 relative z-20 animate-float">
 <!-- Replacing actual image with a CSS/SVG composition for the bird to ensure it matches the prompt perfectly without external assets -->
-<div class="w-40 h-40 relative">
-<div class="w-32 h-32 bg-yellow-400 rounded-full absolute bottom-0 left-1/2 -translate-x-1/2 border-4 border-white shadow-lg flex items-center justify-center overflow-hidden">
+<div class="w-24 h-24 relative">
+<div class="w-20 h-20 bg-yellow-400 rounded-full absolute bottom-0 left-1/2 -translate-x-1/2 border-4 border-white shadow-lg flex items-center justify-center overflow-hidden">
 <!-- Eyes -->
-<div class="absolute top-8 left-6 w-8 h-8 bg-white rounded-full border-2 border-black">
-<div class="w-3 h-3 bg-black rounded-full absolute top-3 right-1"></div>
+<div class="absolute top-4 left-3 w-5 h-5 bg-white rounded-full border-2 border-black">
+<div class="w-2 h-2 bg-black rounded-full absolute top-1.5 right-0.5"></div>
 </div>
-<div class="absolute top-8 right-6 w-8 h-8 bg-white rounded-full border-2 border-black">
-<div class="w-3 h-3 bg-black rounded-full absolute top-3 right-1"></div>
+<div class="absolute top-4 right-3 w-5 h-5 bg-white rounded-full border-2 border-black">
+<div class="w-2 h-2 bg-black rounded-full absolute top-1.5 right-0.5"></div>
 </div>
 <!-- Beak -->
-<div class="absolute top-16 left-1/2 -translate-x-1/2 w-8 h-8 bg-orange-500 rounded-md rotate-45 border-2 border-black/10"></div>
+<div class="absolute top-9 left-1/2 -translate-x-1/2 w-5 h-5 bg-orange-500 rounded-md rotate-45 border-2 border-black/10"></div>
 <!-- Belly -->
-<div class="absolute -bottom-10 w-24 h-24 bg-yellow-200 rounded-full"></div>
+<div class="absolute -bottom-6 w-16 h-16 bg-yellow-200 rounded-full"></div>
 </div>
 <!-- Wings -->
-<div class="absolute top-16 -left-2 w-10 h-14 bg-yellow-500 rounded-full -rotate-12 border-2 border-white"></div>
-<div class="absolute top-16 -right-2 w-10 h-14 bg-yellow-500 rounded-full rotate-12 border-2 border-white"></div>
+<div class="absolute top-10 -left-1 w-6 h-9 bg-yellow-500 rounded-full -rotate-12 border-2 border-white"></div>
+<div class="absolute top-10 -right-1 w-6 h-9 bg-yellow-500 rounded-full rotate-12 border-2 border-white"></div>
 </div>
 </div>
 <!-- Login Card -->
-<div class="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 pt-20 shadow-[0_20px_50px_rgba(8,_112,_184,_0.1)] dark:shadow-none border-4 border-white dark:border-slate-700 relative overflow-hidden">
+<div class="bg-white dark:bg-slate-800 rounded-[2.5rem] p-6 pt-14 shadow-[0_20px_50px_rgba(8,_112,_184,_0.1)] dark:shadow-none border-4 border-white dark:border-slate-700 relative overflow-hidden">
 <!-- Card Header -->
-<div class="text-center mb-8">
-<h1 class="font-display font-black text-4xl text-slate-800 dark:text-white bubbly-text tracking-tight mb-2">
+<div class="text-center mb-4">
+<h1 class="font-display font-black text-3xl text-slate-800 dark:text-white bubbly-text tracking-tight mb-1">
 <span class="text-sky-500">Flappy</span>
 <span class="text-primary">Math</span>
 <span class="text-yellow-400">Bird</span>
 </h1>
-<p class="text-slate-500 dark:text-slate-400 font-bold text-lg">Résous &amp; vole !</p>
+<p class="text-slate-500 dark:text-slate-400 font-bold text-base">Résous &amp; vole !</p>
 </div>
 <!-- Login Form -->
-<form class="space-y-6" onsubmit="event.preventDefault(); validateSecretCode();">
+<form class="space-y-3" onsubmit="event.preventDefault(); validateSecretCode();">
+<div class="space-y-2">
+<label class="block text-slate-700 dark:text-slate-300 font-bold ml-4 uppercase text-sm tracking-wider" for="player-name">Ton prénom</label>
+<div class="relative focus-ring rounded-full transition-all duration-300">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-icons-round text-slate-400 text-3xl">person</span>
+</div>
+<input class="block w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-900 border-2 border-transparent text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none rounded-full text-base font-bold font-display" id="player-name" placeholder="Ton prénom..." type="text" required maxlength="20"/>
+</div>
+</div>
 <div class="space-y-2">
 <label class="block text-slate-700 dark:text-slate-300 font-bold ml-4 uppercase text-sm tracking-wider" for="secret-code">Code secret</label>
 <div class="relative focus-ring rounded-full transition-all duration-300">
 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
 <span class="material-icons-round text-slate-400 text-3xl">lock</span>
 </div>
-<input class="block w-full pl-14 pr-4 py-4 bg-slate-100 dark:bg-slate-900 border-2 border-transparent text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none rounded-full text-xl font-bold font-display" id="secret-code" placeholder="Code..." type="password"/>
+<input class="block w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-900 border-2 border-transparent text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none rounded-full text-base font-bold font-display" id="secret-code" placeholder="Code..." type="password"/>
 </div>
 </div>
 <!-- Msg aide -->
@@ -150,8 +159,8 @@
 <span class="material-icons-round text-lg">error_outline</span>
 <span>Oups ce n'est pas le bon code.</span>
 </div>
-<button class="group w-full bg-primary hover:bg-primary-dark text-slate-900 dark:text-slate-900 py-4 px-6 rounded-full font-black text-2xl shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3" type="submit" id="submit-btn">
-  <span>LET'S FLY !</span>
+<button class="group w-full bg-primary hover:bg-primary-dark text-slate-900 dark:text-slate-900 py-3 px-6 rounded-full font-black text-xl shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3" type="submit" id="submit-btn">
+  <span>C'EST PARTI !</span>
   <span class="material-icons-round group-hover:translate-x-1 transition-transform">flight_takeoff</span>
 </button>
 </form>
@@ -197,8 +206,11 @@ async function validateSecretCode() {
     const data = await response.json();
 
     if (data.success) {
+      // Sauvegarder le prénom du joueur
+      const playerName = document.getElementById('player-name').value.trim();
+      if (playerName) localStorage.setItem('playerName', playerName);
       // Code correct - redirection
-      window.location.href = 'home.html';
+      window.location.href = 'flappybird.html';
     } else {
       // Code incorrect - afficher l'erreur
       errorMsg.classList.remove('opacity-0');

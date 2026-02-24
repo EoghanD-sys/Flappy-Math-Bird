@@ -10,7 +10,183 @@ body{
      justify-content: center;
 }
 
+.game-container {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 #board{
    /* background-color: #87CEEB;*/
     background-image: url('./images/flappybirdbg.png');
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.home-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    align-self: center;
+}
+
+.home-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+}
+
+.home-button:active {
+    transform: translateY(-2px);
+}
+
+.home-button .material-icons-round {
+    color: #3b82f6;
+    font-size: 32px;
+}
+
+.score-panel {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    width: 280px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.score-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.score-header .material-icons-round {
+    color: #f59e0b;
+    font-size: 32px;
+}
+
+.score-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.score-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.score-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.score-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.score-item.top-score {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+}
+
+.score-rank {
+    font-weight: 700;
+    font-size: 18px;
+    color: #6b7280;
+    min-width: 32px;
+}
+
+.score-item.top-score .score-rank {
+    color: #d97706;
+}
+
+.score-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #374151;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 8px;
+}
+
+.score-item.top-score .score-name {
+    color: #92400e;
+}
+
+.score-difficulty {
+    font-weight: 800;
+    font-size: 11px;
+    color: white;
+    padding: 2px 7px;
+    border-radius: 999px;
+    margin-right: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+}
+
+.score-value {
+    font-weight: 700;
+    font-size: 24px;
+    color: #1f2937;
+}
+
+.score-item.top-score .score-value {
+    color: #d97706;
+}
+
+.no-scores {
+    text-align: center;
+    color: #9ca3af;
+    font-style: italic;
+    padding: 40px 0;
+}
+
+.clear-scores-btn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 8px 0;
+    background: none;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clear-scores-btn:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: #fef2f2;
 }

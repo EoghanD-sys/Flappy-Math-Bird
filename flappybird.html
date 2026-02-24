@@ -6,8 +6,34 @@
     <title>Jeu Flappy Math Bird</title>
     <link rel="stylesheet" href="flappybird.css">
     <script src="flappybird.js" defer></script>
+    <!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 </head>
 <body>
-    <canvas id="board"></canvas>
+    <div class="game-container">
+        <canvas id="board"></canvas>
+        <div class="sidebar">
+            <a href="index.html" class="home-button">
+                <span class="material-icons-round">home</span>
+            </a>
+            <div class="score-panel">
+            <div class="score-header">
+                <span class="material-icons-round">leaderboard</span>
+                <h2>Derniers Scores</h2>
+            </div>
+            <div id="scoreList" class="score-list">
+                <p class="no-scores">Aucun score pour le moment</p>
+            </div>
+            <button class="clear-scores-btn" onclick="clearScores()">&#128465; Effacer les scores</button>
+        </div>
+        </div>
+    </div>
 </body>
 </html>
